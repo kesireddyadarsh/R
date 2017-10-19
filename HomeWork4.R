@@ -48,16 +48,25 @@ dtmcA
 plot(dtmcA)
 
 #Algorithm
-Gam.sim <- function(p,N){
+gim<-function(p,N){
   q = 1-p;
+  data_values <-matrix(0,N,N);
   for(i in 1:N){
-    for(j in 1:N){
-      data[i,j]=0;
+    sub_i = i - 1;
+    add_i = i+1;
+    if(i == 1){
+      data_values[i,add_i] = p;
+    }else if(i == N){
+      data_values[i,sub_i] = q;
+    }else{
+      data_values[i,add_i]=p;
+      data_values[i,sub_i]=q;
     }
   }
+  print(data_values);
 }
 
-Gam.sim(0.6,10)
+gim(0.4,5)
 
 
 
