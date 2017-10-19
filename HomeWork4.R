@@ -2,6 +2,7 @@
 # 1. all rec 2. all rec 3. first two rec third tran 4. first two rec last two trans
 # Install the markovchain package in R
 library(markovchain)
+library(Matrix)
 
 # First define the transition matrix
 tmA <- matrix(c(0,0.5,0.5,0.5,0,0.5,0.5,0.5,0), nrow=3, byrow=TRUE);
@@ -49,24 +50,32 @@ plot(dtmcA)
 
 #Algorithm
 gim<-function(p,N){
-  q = 1-p;
-  data_values <-matrix(0,N,N);
+  q = 1-p; #Find other half
+  data_values <-matrix(0,N,N); #Zero Matrix
+  #Required Matrix
   for(i in 1:N){
     sub_i = i - 1;
     add_i = i+1;
     if(i == 1){
-      data_values[i,add_i] = p;
+      data_values[i,add_i] = q;
     }else if(i == N){
-      data_values[i,sub_i] = q;
+      data_values[i,sub_i] = p;
     }else{
-      data_values[i,add_i]=p;
-      data_values[i,sub_i]=q;
+      data_values[i,add_i]=q;
+      data_values[i,sub_i]=p;
     }
   }
   print(data_values);
+  
+  #Transpose Matrix
+  transpose_data_values <- t(data_values);
+  print(transpose_data_values);
+  
+  #Inverse Matrix
+  print(det(data_values));
+  inverse_data_values <- solve(data_values);
+  print(inverse_data_values);
+  
 }
-
 gim(0.4,5)
-
-
 
