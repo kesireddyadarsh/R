@@ -71,11 +71,14 @@ gim<-function(p,N){
   transpose_data_values <- t(data_values);
   print(transpose_data_values);
   
-  #Inverse Matrix
-  print(det(data_values));
-  inverse_data_values <- solve(data_values);
-  print(inverse_data_values);
-  
+  #Create a idenitiy matix
+  Identity_matrix = diag(N);
+  #I-data_values;
+  new_matrix = Identity_matrix - data_values;
+  #find inverse of above
+  inverse_matrix = solve(new_matrix);
+  return(inverse_matrix);
 }
-gim(0.4,5)
+
+matrix <- gim(0.4,5)
 
