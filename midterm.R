@@ -105,7 +105,7 @@ MH_norm <- function(n, alpha)
 
 
 # Run the MH function above
-run1 <- MH_norm(1000,1)
+run1 <- MH_norm(50000,1)
 
 # Plot samples as a time series (partition the plot window into 2 panels)
 par(mfrow=c(2,1))
